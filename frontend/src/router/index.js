@@ -13,6 +13,19 @@ const router = createRouter({
       redirect: { name: 'login' }
     },
     {
+      path: '/admin',
+      name: 'admin',
+      component: () => import('@/views/admin/AdminLayout.vue'),
+      meta: { requiresAdmin: true },
+      children: [
+        {
+          path: '',
+          name: 'admin-appointmens',
+          component: () => import('@/views/admin/AppointmentsView.vue'),
+        }
+      ]
+    },
+    {
       path: '/reservaciones',
       name: 'appointments',
       component: AppointmentLayout,
@@ -54,42 +67,41 @@ const router = createRouter({
               component: () => import('@/views/appointments/AppointmentView.vue'),
             }
           ]
-        },
-        {
-          path: '/auth',
-          name: 'auth',
-          component: () => import('@/views/auth/AuthLayout.vue'),
-          children: [
-            {
-              path: 'registro',
-              name: 'register',
-              component: () => import('@/views/auth/RegisterView.vue'),
-            },
-            {
-              path: 'confirmar-cuenta/:token',
-              name: 'confirm-account',
-              component: () => import('@/views/auth/AccountConfirmView.vue'),
-            },
-            {
-              path: 'login',
-              name: 'login',
-              component: () => import('@/views/auth/LoginView.vue'),
-            },
-            {
-              path: 'olvide-password',
-              name: 'forgot-password',
-              component: () => import('@/views/auth/ForgotPasswordView.vue'),
-            },
-            {
-              path: 'olvide-password/:token',
-              name: 'new-password',
-              component: () => import('@/views/auth/NewPasswordView.vue'),
-            },
-          ]
         }
       ]
     },
-    
+    {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('@/views/auth/AuthLayout.vue'),
+      children: [
+        {
+          path: 'registro',
+          name: 'register',
+          component: () => import('@/views/auth/RegisterView.vue'),
+        },
+        {
+          path: 'confirmar-cuenta/:token',
+          name: 'confirm-account',
+          component: () => import('@/views/auth/AccountConfirmView.vue'),
+        },
+        {
+          path: 'login',
+          name: 'login',
+          component: () => import('@/views/auth/LoginView.vue'),
+        },
+        {
+          path: 'olvide-password',
+          name: 'forgot-password',
+          component: () => import('@/views/auth/ForgotPasswordView.vue'),
+        },
+        {
+          path: 'olvide-password/:token',
+          name: 'new-password',
+          component: () => import('@/views/auth/NewPasswordView.vue'),
+        },
+      ]
+    }
   ]
 })
 
