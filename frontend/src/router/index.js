@@ -13,19 +13,6 @@ const router = createRouter({
       redirect: { name: 'login' }
     },
     {
-      path: '/admin',
-      name: 'admin',
-      component: () => import('@/views/admin/AdminLayout.vue'),
-      meta: { requiresAdmin: true },
-      children: [
-        {
-          path: '',
-          name: 'admin-appointmens',
-          component: () => import('@/views/admin/AppointmentsView.vue'),
-        }
-      ]
-    },
-    {
       path: '/reservaciones',
       name: 'appointments',
       component: AppointmentLayout,
@@ -105,24 +92,24 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
-  if (requiresAuth) {
-    try {
-      const { data } = await AuthAPI.auth()
-      if (data.admin) {
-        next({ name: 'admin' })
-      }
-      else {
-        next()
-      }
-    } catch (error) {
-      next({ name: 'login' })
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach(async (to, from, next) => {
+//   const requiresAuth = to.matched.some(url => url.meta.requiresAuth)
+//   if (requiresAuth) {
+//     try {
+//       const { data } = await AuthAPI.auth()
+//       if (data.admin) {
+//         next({ name: 'admin' })
+//       }
+//       else {
+//         next()
+//       }
+//     } catch (error) {
+//       next({ name: 'login' })
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 router.beforeEach(async (to, from, next) => {
   const requiresAdmin = to.matched.some(url => url.meta.requiresAdmin)
