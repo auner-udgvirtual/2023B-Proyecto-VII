@@ -30,7 +30,7 @@ if (process.argv[2] === '--eClient') {
 
 const corsOptions = {
     origin: function (origin, callback) {
-        if (whiteList.includes(origin)) {
+        if (whiteList.includes(origin) || !origin) {
             // permite conexion
             callback(null, true)
         } else {
