@@ -22,24 +22,25 @@ app.use(express.json())
 db()
 
 // configurar CORS
-const whiteList = [process.env.FRONTEND_URL, 'https://appsalon-frontend.onrender.com']
+// const whiteList = [process.env.FRONTEND_URL, 'https://appsalon-frontend.onrender.com']
 
-if (process.argv[2] === '--eClient') {
-    whiteList.push(undefined)
-}
+// if (process.argv[2] === '--eClient') {
+//     whiteList.push(undefined)
+// }
 
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whiteList.includes(origin) || !origin) {
-            // permite conexion
-            callback(null, true)
-        } else {
-            // No permitir conexion
-            callback(new Error('Error de CORS'))
-        }
-    }
-}
-app.use(cors(corsOptions))
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whiteList.includes(origin) || !origin) {
+//             // permite conexion
+//             callback(null, true)
+//         } else {
+//             // No permitir conexion
+//             callback(new Error('Error de CORS'))
+//         }
+//     }
+// }
+// app.use(cors(corsOptions))
+app.use(cors())
 
 // Define a path
 app.use('/api/services', servicesRoutes)
