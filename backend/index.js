@@ -22,7 +22,7 @@ app.use(express.json())
 db()
 
 // configurar CORS
-const whiteList = [process.env.FRONTEND_URL]
+const whiteList = [process.env.FRONTEND_URL, 'https://appsalon-frontend.onrender.com']
 
 if (process.argv[2] === '--eClient') {
     whiteList.push(undefined)
